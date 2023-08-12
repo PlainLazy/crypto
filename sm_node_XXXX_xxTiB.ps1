@@ -23,7 +23,7 @@ while (1) {
     --smeshing-opts-maxfilesize 4294967296 `
     --smeshing-opts-provider 4294967295 `
     --smeshing-opts-numunits 4 `
-    2>&1 | Tee log_XXXX.txt -Appen
+    2>&1 | Tee log_XXXX.txt -Append
 
     Start-Sleep -Seconds 30
 
