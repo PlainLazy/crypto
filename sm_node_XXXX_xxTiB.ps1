@@ -3,7 +3,7 @@ $host.ui.RawUI.WindowTitle = $MyInvocation.MyCommand.Name
 # get lastest go-spacemesh here: https://github.com/spacemeshos/go-spacemesh/releases
 # get mainnet config here: https://configs.spacemesh.network/config.mainnet.json
 
-# change NNNN with yours (for example: user first 4 chars of your node_id)
+# change NNNN with yours (for example: use first 4 chars of your node_id)
 # smeshing-opts-provider 4294967295 <-- using CPU only
 # check datadir, maxfilesize, numunits
 # for multiple instances, replace ports (7514,9095,9096,9097) with ones that are not yet binded
