@@ -2,6 +2,8 @@
 # thanksTo: --== S A K K I ==--
 # get grpcurl here: https://github.com/fullstorydev/grpcurl/releases
 
+$host.ui.RawUI.WindowTitle = $MyInvocation.MyCommand.Name
+
 function main {
 
     $grpcurlLoc = ".\grpcurl.exe"
