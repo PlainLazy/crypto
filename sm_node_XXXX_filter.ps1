@@ -1,3 +1,16 @@
 $host.ui.RawUI.WindowTitle = $MyInvocation.MyCommand.Name
-Get-Content log_NNNN.txt -Tail 10000 -Wait | Select-String 'proposal created|proposal eligibility for an epoch|generated block|failed to process hare output|not starting hare: node not synced at this layer|waiting till poet round end|initialization: completed|ERROR|App version'
+$list = @(
+    "proposal created",
+    "proposal eligibility for an epoch",
+    "generated block",
+    "failed to process hare output",
+    "not starting hare: node not synced at this layer",
+    "waiting till poet round end",
+    "post setup completed",
+    "ERROR",
+    "App version",
+    "Loaded existing identity",
+    "starting spacemesh"
+)
+Get-Content log_XXX.txt -Tail 20000 -Wait | Select-String ($list -Join '|')
 Pause
