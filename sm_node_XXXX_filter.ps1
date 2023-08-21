@@ -10,7 +10,10 @@ $list = @(
     "ERROR",
     "App version",
     "Loaded existing identity",
-    "starting spacemesh"
+    "starting spacemesh",
+    "post\tcalculating proof of work for nonces",
+    "post\tFound proof for nonce",
+    "post\tproving: generated proof"
 )
 Get-Content log_XXX.txt -Tail 20000 -Wait | Select-String ($list -Join '|')
 Pause
