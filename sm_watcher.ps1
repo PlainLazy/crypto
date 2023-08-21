@@ -10,9 +10,8 @@ function main {
     $sleep = "60"
 
     $listOfNodes = @(
-        @("localhost", "9098", "xxxx_xxxT"),
-        @("localhost", "9095", "yyyy_yyyT"),
-        @("otherhost", "9098", "zzzz_zzzT")
+        @("localhost", "9092", "node1"),
+        @("otherhost", "9092", "node2")
     )
 
     while (!$sunAndAllPlanetsLinedUp){
