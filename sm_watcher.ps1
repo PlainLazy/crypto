@@ -27,6 +27,8 @@ function main {
             $node_highestATX  = "--plaintext", "$nodeHost`:$nodePort", "spacemesh.v1.ActivationService.Highest"
             $node_status = "--plaintext", "$nodeHost`:$nodePort", "spacemesh.v1.NodeService.Status"
 
+            Write-Host "$node ..."
+            
             $resultsNodeHighestATX = ((Invoke-Expression "$grpcurlLoc $node_highestATX") | ConvertFrom-Json).atx
             $resultsNodeStatus = ((Invoke-Expression "$grpcurlLoc $node_status") | ConvertFrom-Json).status
 
@@ -46,6 +48,7 @@ function main {
 
         }
 
+        cls
         $object | ft
 
         Write-Host "---- Highest ATX -----" -ForegroundColor Yellow
