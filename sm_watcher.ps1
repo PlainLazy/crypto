@@ -33,7 +33,6 @@ function main {
             $resultsNodeStatus = ((Invoke-Expression "$grpcurlLoc $node_status") | ConvertFrom-Json).status
 
             $customObject = [PSCustomObject]@{
-    
                 name = $node[2]
                 "host:port" = "$nodeHost`:$nodePort"
                 peers = $resultsNodeStatus.connectedPeers
@@ -41,7 +40,6 @@ function main {
                 syncedLayer = $resultsNodeStatus.syncedLayer.number
                 topLayer = $resultsNodeStatus.topLayer.number
                 verifiedLayer = $resultsNodeStatus.verifiedLayer.number
-    
             }
 
             $object+=$customObject
