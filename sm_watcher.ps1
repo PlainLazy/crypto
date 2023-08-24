@@ -6,61 +6,57 @@ $host.ui.RawUI.WindowTitle = $MyInvocation.MyCommand.Name
 
 function main {
 
-    $grpcurlLoc = ".\grpcurl.exe"
-    $sleep = "60"
+    $grpcurl = ".\grpcurl.exe"
+    $cooldown = 300
 
-    $listOfNodes = @(
+    $list = @(
         @("localhost", "9092", "node1"),
         @("otherhost", "9092", "node2")
     )
 
-    while (!$sunAndAllPlanetsLinedUp){
+    while (1) {
 
         cls
         $object=@()
 
-        $nodes = foreach ($node in $listOfNodes) {
+        $node = $list[0]
+        $resultsNodeHighestATX = ((Invoke-Expression (
+            $grpcurl +" --plaintext -max-time 3 " + $node[0] + ":" + $node[1] + " spacemesh.v1.ActivationService.Highest"
+        )) | ConvertFrom-Json).atx
 
-            $nodeHost = $node[0]
-            $nodePort = $node[1]
-
-            $node_highestATX  = "--plaintext", "$nodeHost`:$nodePort", "spacemesh.v1.ActivationService.Highest"
-            $node_status = "--plaintext", "$nodeHost`:$nodePort", "spacemesh.v1.NodeService.Status"
-
+        foreach ($node in $list) {
             Write-Host "$node ..."
-            
-            $resultsNodeHighestATX = ((Invoke-Expression "$grpcurlLoc $node_highestATX") | ConvertFrom-Json).atx
-            $resultsNodeStatus = ((Invoke-Expression "$grpcurlLoc $node_status") | ConvertFrom-Json).status
-
-            $customObject = [PSCustomObject]@{
-                name = $node[2]
-                "host:port" = "$nodeHost`:$nodePort"
-                peers = $resultsNodeStatus.connectedPeers
-                isSynced = $resultsNodeStatus.isSynced
-                syncedLayer = $resultsNodeStatus.syncedLayer.number
-                topLayer = $resultsNodeStatus.topLayer.number
-                verifiedLayer = $resultsNodeStatus.verifiedLayer.number
+            $status = ((Invoke-Expression (
+                $grpcurl + " --plaintext -max-time 3 " + $node[0] + ":" + $node[1] + " spacemesh.v1.NodeService.Status"
+            )) | ConvertFrom-Json).status
+            $o = [PSCustomObject]@{
+                host = $node[0]
+                port = $node[1]
+                info = $node[2]
+                peers = $status.connectedPeers
+                isSynced = $status.isSynced
+                syncedLayer = $status.syncedLayer.number
+                topLayer = $status.topLayer.number
+                verifiedLayer = $status.verifiedLayer.number
             }
-
-            $object+=$customObject
-
+            $object += $o
         }
 
         cls
         $object | ft
 
-        Write-Host "---- Highest ATX -----" -ForegroundColor Yellow
-        Write-Host "   Address: " $($resultsNodeHighestATX.coinbase.address) -ForegroundColor Green
-        Write-Host " Base64_ID: " $resultsNodeHighestATX.id.id -ForegroundColor Green
-        Write-Host "    Hex_ID: " (B64_to_Hex -id2convert $resultsNodeHighestATX.id.id) -ForegroundColor Green
-        Write-Host "     Layer: " $resultsNodeHighestATX.layer.number -ForegroundColor Green
-        Write-Host "  NumUnits: " $resultsNodeHighestATX.numUnits -ForegroundColor Green
-        Write-Host "   PrevATX: "$resultsNodeHighestATX.prevAtx.id -ForegroundColor Green
-        Write-Host " SmesherID: " $resultsNodeHighestATX.smesherId.id -ForegroundColor Green
-        Write-Host "SmeshIDHex: " (B64_to_Hex -id2convert $resultsNodeHighestATX.smesherId.id) -ForegroundColor Green
-        Write-Host "----------------------" -ForegroundColor Yellow
+        #Write-Host "---- Highest ATX -----" -ForegroundColor Yellow
+        #Write-Host "   Address: " $($resultsNodeHighestATX.coinbase.address) -ForegroundColor Green
+        #Write-Host " Base64_ID: " $resultsNodeHighestATX.id.id -ForegroundColor Green
+        Write-Host "Highest ATX Hex_ID: " (B64_to_Hex -id2convert $resultsNodeHighestATX.id.id) -ForegroundColor Green
+        #Write-Host "     Layer: " $resultsNodeHighestATX.layer.number -ForegroundColor Green
+        #Write-Host "  NumUnits: " $resultsNodeHighestATX.numUnits -ForegroundColor Green
+        #Write-Host "   PrevATX: "$resultsNodeHighestATX.prevAtx.id -ForegroundColor Green
+        #Write-Host " SmesherID: " $resultsNodeHighestATX.smesherId.id -ForegroundColor Green
+        #Write-Host "SmeshIDHex: " (B64_to_Hex -id2convert $resultsNodeHighestATX.smesherId.id) -ForegroundColor Green
+        #Write-Host "----------------------" -ForegroundColor Yellow
 
-        Start-Sleep -Seconds $sleep
+        Start-Sleep -Seconds $cooldown
 
     }
 
