@@ -29,15 +29,17 @@ function main {
             $status = ((Invoke-Expression (
                 $grpcurl + " --plaintext -max-time 3 " + $node[0] + ":" + $node[1] + " spacemesh.v1.NodeService.Status"
             )) | ConvertFrom-Json).status
+            $version = ((Invoke-Expression (
+                $grpcurl + " --plaintext -max-time 3 " + $node[0] + ":" + $node[1] + " spacemesh.v1.NodeService.Version"
+            )) | ConvertFrom-Json).versionString.value
             $o = [PSCustomObject]@{
                 host = $node[0]
                 port = $node[1]
                 info = $node[2]
                 peers = $status.connectedPeers
-                isSynced = $status.isSynced
-                syncedLayer = $status.syncedLayer.number
-                topLayer = $status.topLayer.number
-                verifiedLayer = $status.verifiedLayer.number
+                synced = $status.isSynced
+                "layer top verified" = "" + $status.syncedLayer.number + " " + $status.topLayer.number + " " + $status.verifiedLayer.number
+                ver = $version
             }
             $object += $o
         }
