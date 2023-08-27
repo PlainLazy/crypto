@@ -10,8 +10,9 @@ function main {
     $cooldown = 300
 
     $list = @(
-        @("localhost", "9092", "node1"),
-        @("otherhost", "9092", "node2")
+        @{ host = "127.0.0.1";  port = "9092"; info = "Suppa Node 1" },
+        @{ host = "localhost";  port = "9095"; info = "Duppa Node 2" },
+        @{ host = "farfaraway"; port = "9092"; info = "ElonMaskIphone99ProMaxUltraHyperDogeWoffWoff" }
     )
 
     while (1) {
@@ -21,24 +22,24 @@ function main {
 
         $node = $list[0]
         $resultsNodeHighestATX = ((Invoke-Expression (
-            $grpcurl +" --plaintext -max-time 3 " + $node[0] + ":" + $node[1] + " spacemesh.v1.ActivationService.Highest"
+            $grpcurl +" --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.ActivationService.Highest"
         )) | ConvertFrom-Json).atx
 
         foreach ($node in $list) {
-            Write-Host "$node ..."
+            Write-Host "$($node.host):$($node.port) ..."
             $status = ((Invoke-Expression (
-                $grpcurl + " --plaintext -max-time 3 " + $node[0] + ":" + $node[1] + " spacemesh.v1.NodeService.Status"
+                $grpcurl + " --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Status"
             )) | ConvertFrom-Json).status
             $version = ((Invoke-Expression (
-                $grpcurl + " --plaintext -max-time 3 " + $node[0] + ":" + $node[1] + " spacemesh.v1.NodeService.Version"
+                $grpcurl + " --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Version"
             )) | ConvertFrom-Json).versionString.value
             $o = [PSCustomObject]@{
-                host = $node[0]
-                port = $node[1]
-                info = $node[2]
+                host = $node.host
+                port = $node.port
+                info = $node.info
                 peers = $status.connectedPeers
                 synced = $status.isSynced
-                "layer top verified" = "" + $status.syncedLayer.number + " " + $status.topLayer.number + " " + $status.verifiedLayer.number
+                "layer top verified" = "$($status.syncedLayer.number) $($status.topLayer.number) $($status.verifiedLayer.number)"
                 ver = $version
             }
             $object += $o
