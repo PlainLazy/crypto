@@ -22,16 +22,16 @@ function main {
 
         $node = $list[0]
         $resultsNodeHighestATX = ((Invoke-Expression (
-            $grpcurl +" --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.ActivationService.Highest"
+            "$($grpcurl) --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.ActivationService.Highest"
         )) | ConvertFrom-Json).atx
 
         foreach ($node in $list) {
             Write-Host "$($node.host):$($node.port) ..."
             $status = ((Invoke-Expression (
-                $grpcurl + " --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Status"
+                "$($grpcurl) --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Status"
             )) | ConvertFrom-Json).status
             $version = ((Invoke-Expression (
-                $grpcurl + " --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Version"
+                "$($grpcurl) --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Version"
             )) | ConvertFrom-Json).versionString.value
             $o = [PSCustomObject]@{
                 host = $node.host
