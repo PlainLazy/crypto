@@ -1,4 +1,5 @@
 select
+	datetime() utc_time,
 	*,
 	round(h9_coins_share / h9_cap_share * 100, 2) h9_effectivity
 from (
