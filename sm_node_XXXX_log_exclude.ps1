@@ -27,6 +27,8 @@ $exclude = @(
     "hare\tlate message failed contextual validation"
     "hare\tmessage failed syntactic validation"
     "hare\tearly message failed syntactic validation, discarding"
+    "hare\tbegin notify round: not enough commits"
+    "hare\tstarting new iteration"
     "mesh\talready synced certificate"
     "hare\tcounting votes from malicious identities in aggregated messages"
     "hareOracle\t"
