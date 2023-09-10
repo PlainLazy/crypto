@@ -10,8 +10,8 @@ function main {
     $cooldown = 300
 
     $list = @(
-        @{ host = "127.0.0.1";  port = 9092; info = "Suppa Node 1" },
-        @{ host = "localhost";  port = 9095; info = "Duppa Node 2" },
+        @{ host = "127.0.0.1";  port = 9092; info = "Suppa Node 1" }
+        @{ host = "localhost";  port = 9095; info = "Duppa Node 2" }
         @{ host = "farfaraway"; port = 9092; info = "ElonMaskIphone99ProMaxUltraHyperDogeWoffWoff" }
     )
 
