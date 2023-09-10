@@ -15,7 +15,7 @@ $dataDir = "post_data"
 ###########################
 ###########################
 
-$filesTotal = $numUnits * 64 * 1024 * 1024 / $fileSize
+$filesTotal = $numUnits * 64 * 1024 * 1024 * 1024 / $fileSize
 write-host "filesTotal $filesTotal" -ForegroundColor Yellow
 $processes = @{}
 $fileCounter = $startFromFile
@@ -25,10 +25,7 @@ while ($fileCounter -le $filesTotal) {
         if ($fileCounter -le $filesTotal) {
             $pp = $processes[$p]
             if (!$pp -or $pp.HasExited) {
-                $fromFile = $fileCounter
-                $toFile = $fileCounter + 1
-                $fileCounter++
-                write-host " provider $p starts file $fromFile" -ForegroundColor Yellow
+                write-host " provider $p starts file $fileCounter" -ForegroundColor Yellow
                 $processes[$p] = start-process `
                     -NoNewWindow `
                     -filepath postcli.exe `
@@ -41,8 +38,9 @@ while ($fileCounter -le $filesTotal) {
                         "-maxFileSize $fileSize",
                         "-numUnits $numUnits",
                         "-datadir $dataDir",
-                        "-fromFile $fromFile",
-                        "-toFile $toFile"
+                        "-fromFile $fileCounter",
+                        "-toFile $fileCounter"
+                $fileCounter++
             }
         }
     }
