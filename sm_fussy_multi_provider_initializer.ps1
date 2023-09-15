@@ -1,18 +1,21 @@
+# The program initializes files sequentially.
+# Each file is initialized by one provider.
+# When the provider finishes initializing the file, it is given the next one.
+# In this way, all providers will be used until there are no files left in the initialization queue.
+# Even if the providers are different in power, this will not lead to downtime for the more powerful ones.
+
 # get postcli here: https://github.com/spacemeshos/post/releases
 
 .\postcli.exe -printProviders
 
-###########################
 #### edit this section ####
-#gpus=[0,1,2,3,...] (any of, in any order) cpu=4294967295 (for details .\postcli.exe -printProviders)
-$providers = 4,3,0,4294967295  # in this case: gpu4,gpu3,gpu0,cpu (cpu is very weak provider, dont use it ;))
+$providers = 0,1,4  # in this case GPU0, GPU1 and GPU4 are used (also you can use CPU, its number is 4294967295)
 $atx = "435FA442517E9C75087DE1B06D2A9D12C345505F3CAC93AC52B816171CE48308"
-$nodeId = "9acc..."
-$fileSize = 2 * 1024 * 1024 * 1024  # 2 GiB
+$nodeId = "9acc..."  # Your public nodeId (smehserId)
+$fileSize = 2 * 1024 * 1024 * 1024  # 2 GiB  (For larger volumes, for convenience, you can increase to 4,8,16+ GiB)
 $startFromFile = 0
 $numUnits = 4  # 64 GiB each (mininum 4)
 $dataDir = "post_data"
-###########################
 ###########################
 
 $filesTotal = $numUnits * 64 * 1024 * 1024 * 1024 / $fileSize
