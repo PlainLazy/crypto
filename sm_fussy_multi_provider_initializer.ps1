@@ -4,7 +4,9 @@
 # In this way, all providers will be used until there are no files left in the initialization queue.
 # Even if the providers are different in power, this will not lead to downtime for the more powerful ones.
 
-# get postcli here: https://github.com/spacemeshos/post/releases
+# Get postcli: https://github.com/spacemeshos/post/releases
+# RTM https://github.com/spacemeshos/post/blob/develop/cmd/postcli/README.md
+# After completing the initialization of the subsets, you will need to combine the files into same direcory and merge postmeta_data.json as described in the README.md
 
 .\postcli.exe -printProviders
 
@@ -40,7 +42,7 @@ while ($fileCounter -le $filesTotal) {
                         "-labelsPerUnit 4294967296",
                         "-maxFileSize $fileSize",
                         "-numUnits $numUnits",
-                        "-datadir $dataDir",
+                        "-datadir $dataDir\data$p",
                         "-fromFile $fileCounter",
                         "-toFile $fileCounter"
                 $fileCounter++
