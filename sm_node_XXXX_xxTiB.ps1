@@ -26,6 +26,8 @@ $host.ui.RawUI.WindowTitle = $MyInvocation.MyCommand.Name
 # for multiple instances, replace ports (7514,9095,9096,9097 from config and parameters) with ones that are not yet binded
 # memo: provider 4294967295 <-- using CPU only
 
+$PSDefaultParameterValues = @{'Out-File:Encoding' = 'utf8'}
+
 while (1) {
 
     ./go-spacemesh `
