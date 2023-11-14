@@ -31,6 +31,6 @@ foreach ($r in $rockets) {
     $summ += $result.speed_gib_s
     $count++
 }
-write-host "average: $([math]::Round($summ/$count,3)) gib_s"
+write-host "sum: $([math]::Round($summ,3)) gib_s, average: $([math]::Round($summ/$count,3)) gib_s"
 remove-item -LiteralPath $rockets.LogFile
 pause
