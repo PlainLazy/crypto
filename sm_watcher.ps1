@@ -22,7 +22,7 @@ function main {
 
         log("$($node.host):$($node.port) ... atx")
         $resultsNodeHighestATX = ((Invoke-Expression (
-            "$($grpcurl) --plaintext -max-time 10 $($node.host):$($node.port) spacemesh.v1.ActivationService.Highest"
+            "$($grpcurl) --plaintext -max-time 20 $($node.host):$($node.port) spacemesh.v1.ActivationService.Highest"
         )) | ConvertFrom-Json).atx 2>$null
 
         foreach ($node in $list) {
