@@ -12,7 +12,7 @@
 
 #### edit this section ####
 $providers = 0,1,4  # in this case GPU0, GPU1 and GPU4 are used (also you can use CPU, its number is 4294967295)
-$atx = "077a0114add37d7ea2edbe729bd1be5f0b384ae811b2f92018fc20bd18321239"
+$atx = "B08B4CF7C7038A7DE6C31173FAB27C8479A0AC2F083A3DDC4803F3D12147A6A9"
 $nodeId = "9acc..."  # Your public nodeId (smehserId)
 $fileSize = 2 * 1024 * 1024 * 1024  # 2 GiB  (For larger volumes, for convenience, you can increase to 4,8,16+ GiB)
 $startFromFile = 0
