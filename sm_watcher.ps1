@@ -3,6 +3,8 @@
 # get grpcurl here: https://github.com/fullstorydev/grpcurl/releases
 
 $host.ui.RawUI.WindowTitle = $MyInvocation.MyCommand.Name
+[console]::WindowWidth=80;
+[console]::WindowHeight=50;
 
 function main {
 
@@ -20,10 +22,10 @@ function main {
         $object=@()
         $node = $list[0]
 
-        log("$($node.host):$($node.port) ... atx")
-        $resultsNodeHighestATX = ((Invoke-Expression (
-            "$($grpcurl) --plaintext -max-time 20 $($node.host):$($node.port) spacemesh.v1.ActivationService.Highest"
-        )) | ConvertFrom-Json).atx 2>$null
+        #log("$($node.host):$($node.port) ... atx")
+        #$resultsNodeHighestATX = ((Invoke-Expression (
+        #    "$($grpcurl) --plaintext -max-time 20 $($node.host):$($node.port) spacemesh.v1.ActivationService.Highest"
+        #)) | ConvertFrom-Json).atx 2>$null
 
         foreach ($node in $list) {
 
@@ -32,10 +34,21 @@ function main {
                 "$($grpcurl) --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Status"
             )) | ConvertFrom-Json).status 2>$null
 
-            log("$($node.host):$($node.port) ... ver")
-            $version = ((Invoke-Expression (
-                "$($grpcurl) --plaintext -max-time 3 $($node.host):$($node.port) spacemesh.v1.NodeService.Version"
-            )) | ConvertFrom-Json).versionString.value 2>$null
+            if ($status -ne $null) {
+                
+                log("$($node.host):$($node.port) ... ver")
+                $version = ((Invoke-Expression (
+                    "$($grpcurl) --plaintext -max-time 5 $($node.host):$($node.port) spacemesh.v1.NodeService.Version"
+                )) | ConvertFrom-Json).versionString.value 2>$null
+
+                #log("$($node.host):$($node.port) ... p2p")
+                #$p2p = ((Invoke-Expression (
+                #    "$($grpcurl) --plaintext -max-time 5 $($node.host):$($node.port) spacemesh.v1.DebugService.NetworkInfo"
+                #)) | ConvertFrom-Json).id
+
+            } else {
+                $version = $null
+            }
 
             #log("$($node.host):$($node.port) ... p2p")
             #$p2p = ((Invoke-Expression (
@@ -62,7 +75,7 @@ function main {
             #Write-Host "---- Highest ATX -----" -ForegroundColor Yellow
             #Write-Host "   Address: " $($resultsNodeHighestATX.coinbase.address) -ForegroundColor Green
             #Write-Host " Base64_ID: " $resultsNodeHighestATX.id.id -ForegroundColor Green
-            Write-Host "Highest ATX: " (B64_to_Hex -id2convert $resultsNodeHighestATX.id.id) -ForegroundColor Green
+            #Write-Host "Highest ATX: " (B64_to_Hex -id2convert $resultsNodeHighestATX.id.id) -ForegroundColor Green
             #Write-Host "     Layer: " $resultsNodeHighestATX.layer.number -ForegroundColor Green
             #Write-Host "  NumUnits: " $resultsNodeHighestATX.numUnits -ForegroundColor Green
             #Write-Host "   PrevATX: "$resultsNodeHighestATX.prevAtx.id -ForegroundColor Green
