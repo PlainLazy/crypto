@@ -1,5 +1,7 @@
 # IO stage performance test
+$host.ui.RawUI.WindowTitle = 'sm_proving_multi'
 
+$duration = 60  # seconds
 $jobs = @(
     @{ file = 'D:\node1\postdata_3.bin'; threads = 4; nonces = 288 }
     @{ file = 'E:\node2\postdata_3.bin'; threads = 3; nonces = 288 }
@@ -8,9 +10,10 @@ $jobs = @(
     #@{ file = 'H:\node5\postdata_4.bin'; threads = 2; nonces = 288 }
     #@{ file = 'I:\node6\postdata_2.bin'; threads = 1; nonces = 288 }
 )
-$duration = 60  # seconds
+
+write-host "duration $duration seconds"
 $rockets = $jobs | ForEach-Object -Begin { $i = 0 } {
-    write-host "proving $($_.file) ..."
+    write-host "proving file '$($_.file)' $($_.threads) threads $($_.nonces) nonces ..."
     $logFile = 'proving_log_{0:000}.txt' -f ++$i
     [pscustomobject] @{
     Job = $_
@@ -22,7 +25,8 @@ $rockets = $jobs | ForEach-Object -Begin { $i = 0 } {
     }
 }
 $rockets.Process | Wait-Process
-write-host 'resilts:'
+
+write-host "-- results of $duration seconds --"
 $summ = 0
 $count = 0
 foreach ($r in $rockets) {
@@ -31,6 +35,7 @@ foreach ($r in $rockets) {
     $summ += $result.speed_gib_s
     $count++
 }
-write-host "sum: $([math]::Round($summ,3)) gib_s, average: $([math]::Round($summ/$count,3)) gib_s"
+write-host "sum: $([math]::Round($summ,3)) gib_s"
+write-host "avg: $([math]::Round($summ/$count,3)) gib_s"
 remove-item -LiteralPath $rockets.LogFile
 pause
