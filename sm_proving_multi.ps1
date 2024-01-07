@@ -11,7 +11,6 @@ $jobs = @(
     #@{ file = 'I:\node6\postdata_2.bin'; threads = 1; nonces = 288 }
 )
 
-write-host "duration $duration seconds"
 $rockets = $jobs | ForEach-Object -Begin { $i = 0 } {
     write-host "proving file '$($_.file)' $($_.threads) threads $($_.nonces) nonces ..."
     $logFile = 'proving_log_{0:000}.txt' -f ++$i
