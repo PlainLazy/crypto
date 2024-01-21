@@ -8,6 +8,8 @@
 # RTM https://github.com/spacemeshos/post/blob/develop/cmd/postcli/README.md
 # After completing the initialization of the subsets, you will need to combine the files into same direcory and merge postmeta_data.json as described in the README.md
 
+# linux version: https://github.com/Stizerg/sm-multi-gpu-init/blob/main/sm-multi-gpu-init.sh
+
 .\postcli.exe -printProviders
 
 #### edit this section ####
