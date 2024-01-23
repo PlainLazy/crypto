@@ -30,18 +30,18 @@
   "logging": { "p2p": "error", "grpc": "error", "hare": "error", "fetcher": "warn" },
   "smeshing": {
     "smeshing-opts": {
-      "smeshing-opts-datadir": "C:\...PATH-TO-POST-DIR",
-      "smeshing-opts-maxfilesize": ...FILE-SIZE-IN-BYTES,
-      "smeshing-opts-numunits": ...NUM-UNITS,
+      "smeshing-opts-datadir": "C:\PATH-TO-POST-DIR",
+      "smeshing-opts-maxfilesize": FILE-SIZE-IN-BYTES,
+      "smeshing-opts-numunits": NUM-UNITS,
       "smeshing-opts-provider": 4294967295,
       "smeshing-opts-throttle": false,
       "smeshing-opts-compute-batch-size": 1048576,
       "smeshing-opts-proving-powflags": 14
     },
-    "smeshing-coinbase": "sm1qqqqqqq...WALLET",
+    "smeshing-coinbase": "WALLET",
     "smeshing-proving-opts": {
       "smeshing-opts-proving-nonces": 288,
-      "smeshing-opts-proving-threads": ...THREADS
+      "smeshing-opts-proving-threads": THREADS
     },
     "smeshing-verifying-opts": {
       "smeshing-opts-verifying-min-workers": 2,
