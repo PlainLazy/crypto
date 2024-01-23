@@ -29,8 +29,8 @@
       "smeshing-opts-proving-threads": 24
     },
     "smeshing-verifying-opts": {
-      "smeshing-opts-verifying-min-workers": 1,
-      "smeshing-opts-verifying-workers": 4
+      "smeshing-opts-verifying-min-workers": 2,
+      "smeshing-opts-verifying-workers": 10
     },
     "smeshing-start": true
   },
