@@ -6,7 +6,7 @@
   "p2p": {
     "listen": "/ip4/0.0.0.0/tcp/5802",
     "bootnodes": [],
-    "direct": [ "/dns4/PUBLIC-NODE/tcp/5801/p2p/P2P-KEY" ],
+    "direct": [ "/dns4/public-node-hostname.local/tcp/5801/p2p/12D3KooWQSwwYci6poPyGDrun2i7kRt3bRnrR84kDTtFUAZk1CFg" ],
     "min-peers": 1,
     "low-peers": 10,
     "high-peers": 20,
@@ -15,9 +15,9 @@
   "logging": { "p2p": "error", "grpc": "error", "hare": "error" },
   "smeshing": {
     "smeshing-opts": {
-      "smeshing-opts-datadir": "C:\PATH-TO-POST-DIR",
-      "smeshing-opts-maxfilesize": FILE-SIZE-IN-BYTES,
-      "smeshing-opts-numunits": NUM-UNITS,
+      "smeshing-opts-datadir": "C:\\post-dir",
+      "smeshing-opts-maxfilesize": 68719476736,
+      "smeshing-opts-numunits": 999,
       "smeshing-opts-provider": 4294967295,
       "smeshing-opts-throttle": false,
       "smeshing-opts-compute-batch-size": 1048576,
@@ -26,7 +26,7 @@
     "smeshing-coinbase": "WALLET",
     "smeshing-proving-opts": {
       "smeshing-opts-proving-nonces": 288,
-      "smeshing-opts-proving-threads": THREADS
+      "smeshing-opts-proving-threads": 24
     },
     "smeshing-verifying-opts": {
       "smeshing-opts-verifying-min-workers": 1,
