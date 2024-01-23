@@ -38,7 +38,7 @@
       "smeshing-opts-compute-batch-size": 1048576,
       "smeshing-opts-proving-powflags": 14
     },
-    "smeshing-coinbase": "WALLET",
+    "smeshing-coinbase": "sm1qqqqqqq04h9wlpqgfj878kfumrfsk0h92u0sxjcmjjpux",
     "smeshing-proving-opts": {
       "smeshing-opts-proving-nonces": 288,
       "smeshing-opts-proving-threads": 24
