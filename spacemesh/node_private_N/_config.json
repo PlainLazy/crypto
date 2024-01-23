@@ -1,6 +1,6 @@
 {
   "main": { "data-folder": ".", "filelock": "lock", "layer-duration": "5m", "layers-per-epoch": 4032 },
-  "post": { "post-labels-per-unit": 4294967296, "post-max-numunits": 1048576 }, "poet": { "cycle-gap": "12h" },
+  "post": { "post-labels-per-unit": 4294967296, "post-max-numunits": 1048576, "post-k3": 0 }, "poet": { "cycle-gap": "12h" },
   "api": { "grpc-public-listener":    "0.0.0.0:9802",
            "grpc-private-listener": "127.0.0.1:8802" },
   "p2p": {
@@ -20,8 +20,7 @@
       "smeshing-opts-numunits": ...NUM-UNITS,
       "smeshing-opts-provider": 4294967295,
       "smeshing-opts-throttle": false,
-      "smeshing-opts-compute-batch-size": 1048576,
-      "smeshing-opts-proving-powflags": 14
+      "smeshing-opts-compute-batch-size": 1048576
     },
     "smeshing-coinbase": "sm1qqqqqqq...WALLET",
     "smeshing-proving-opts": {
