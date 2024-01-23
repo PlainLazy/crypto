@@ -21,7 +21,7 @@
       "/dns4/mainnet-bootnode-16.spacemesh.network/tcp/5000/p2p/12D3KooWDAFRuFrMNgVQMDy8cgD71GLtPyYyfQzFxMZr2yUBgjHK",
       "/dns4/mainnet-bootnode-18.spacemesh.network/tcp/5000/p2p/12D3KooWMJmdfwxDctuGGoTYJD8Wj9jubQBbPfrgrzzXaQ1RTKE6"
     ],
-    "min-peers": 20,
+    "min-peers": 16,
     "low-peers": 50,
     "high-peers": 50,
     "inbound-fraction": 1,
@@ -45,7 +45,8 @@
     },
     "smeshing-verifying-opts": {
       "smeshing-opts-verifying-min-workers": 2,
-      "smeshing-opts-verifying-workers": 12
+      "smeshing-opts-verifying-workers": 12,
+      "smeshing-opts-verifying-powflags": 14
     },
     "smeshing-start": true
   },
