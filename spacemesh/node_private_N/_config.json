@@ -12,7 +12,7 @@
     "high-peers": 20,
     "disable-dht": true
   },
-  "logging": { "p2p": "error", "grpc": "error", "hare": "error" },
+  "logging": { "p2p": "error", "grpc": "error", "hare": "error", "fetcher": "warn" },
   "smeshing": {
     "smeshing-opts": {
       "smeshing-opts-datadir": "C:\\post-dir",
