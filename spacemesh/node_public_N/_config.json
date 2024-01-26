@@ -35,8 +35,7 @@
       "smeshing-opts-numunits": 999,
       "smeshing-opts-provider": 4294967295,
       "smeshing-opts-throttle": false,
-      "smeshing-opts-compute-batch-size": 1048576,
-      "smeshing-opts-proving-powflags": 14
+      "smeshing-opts-compute-batch-size": 1048576
     },
     "smeshing-coinbase": "sm1qqqqqqq04h9wlpqgfj878kfumrfsk0h92u0sxjcmjjpux",
     "smeshing-proving-opts": {
