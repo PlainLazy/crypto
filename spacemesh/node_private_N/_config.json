@@ -11,6 +11,7 @@
     "min-peers": 1,
     "low-peers": 10,
     "high-peers": 20,
+    "disable-reuseport": true,
     "disable-dht": true
   },
   "logging": { "p2p": "error", "grpc": "error", "hare": "error", "fetcher": "warn" },
