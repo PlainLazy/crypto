@@ -1,6 +1,6 @@
 {
   "main": { "data-folder": ".", "filelock": "lock", "layer-duration": "5m", "layers-per-epoch": 4032 },
-  "post": { "post-labels-per-unit": 4294967296, "post-max-numunits": 1048576, "post-k3": 0 },
+  "post": { "post-labels-per-unit": 4294967296, "post-max-numunits": 1048576 },
   "poet": { "cycle-gap": "12h" },
   "api": { "grpc-public-listener":    "0.0.0.0:9802",
            "grpc-private-listener": "127.0.0.1:8802" },
@@ -30,6 +30,7 @@
       "smeshing-opts-proving-threads": 24
     },
     "smeshing-verifying-opts": {
+      "smeshing-opts-verifying-disable": true,
       "smeshing-opts-verifying-min-workers": 2,
       "smeshing-opts-verifying-workers": 10
     },
