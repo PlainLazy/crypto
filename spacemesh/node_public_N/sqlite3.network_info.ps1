@@ -35,6 +35,7 @@ select
   $coinbases   = [math]::Round($d[1], 2)
   $smeshers    = [math]::Round($d[2], 2)
   $networkPiB  = [math]::Round($d[4], 2)
+  $coinsPerTiB24hAvg = [math]::Round($d[7], 4)
   $network += [PSCustomObject]@{
     'epoch'              = [math]::Round($d[0])
     'coinbases'          = $coinbases
@@ -44,7 +45,8 @@ select
     'biggestTiB'         = [math]::Round($d[3], 1)
     'rewards'            = [math]::Round($d[5])
     'progress'           = [math]::Round($d[6], 4)
-    'coinsPerTiB24hAvg'  = [math]::Round($d[7], 4)
+    'coinsPerTiB24hAvg'  = $coinsPerTiB24hAvg
+    'change'             = if ($prev -ne $null) { [math]::Round($coinsPerTiB24hAvg / $prev.'coinsPerTiB24hAvg', 2) } else { 0 }
   }
 }
 
