@@ -2,17 +2,21 @@
   "main": { "data-folder": ".", "filelock": "lock", "layer-duration": "5m", "layers-per-epoch": 4032 },
   "post": { "post-labels-per-unit": 4294967296, "post-max-numunits": 1048576 },
   "poet": { "cycle-gap": "12h" },
-  "api": { "grpc-public-listener":    "0.0.0.0:9802",
-           "grpc-private-listener": "127.0.0.1:8802" },
+  "api": {
+    "grpc-public-listener":    "0.0.0.0:59802",
+    "grpc-private-listener": "127.0.0.1:58802"
+  },
   "p2p": {
-    "listen": "/ip4/0.0.0.0/tcp/6000",
+    "listen": "/ip4/0.0.0.0/tcp/57802",
+    "disable-reuseport": true,
     "bootnodes": [],
-    "direct": [ "/dns4/localhost/tcp/5801/p2p/12D3KooWQSwwYci6poPyGDrun2i7kRt3bRnrR84kDTtFUAZk1CFg" ],
+    "direct": [ "/dns4/localhost/tcp/57801/p2p/12D3KooWQSwwYci6poPyGDrun2i7kRt3bRnrR84kDTtFUAZk1CFg" ],
     "min-peers": 1,
     "low-peers": 10,
     "high-peers": 20,
     "disable-dht": true
   },
+  "time": { "peersync": { "disable": true } },
   "logging": { "p2p": "error", "grpc": "error", "hare": "error", "fetcher": "warn" },
   "smeshing": {
     "smeshing-opts": {
