@@ -1,6 +1,6 @@
 $host.ui.RawUI.WindowTitle = Split-Path -Path $pwd -Leaf
-[console]::WindowWidth  = 80;
-[console]::WindowHeight = 50;
+[console]::WindowWidth  = 100;
+[console]::WindowHeight = 30;
 $addr = (gc _config.json | convertFrom-json).api.'grpc-private-listener'
 $table = @()
 $buff = ''
