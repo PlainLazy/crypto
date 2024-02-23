@@ -9,7 +9,9 @@
   "p2p": {
     "listen": "/ip4/127.0.0.1/tcp/6000",
     "bootnodes": [],
-    "direct": [ "/ip4/127.0.0.1/tcp/7513/p2p/12D3KooWQSwwYci6poPyGDrun2i7kRt3bRnrR84kDTtFUAZk1CFg" ],
+    "direct": [
+      "/ip4/127.0.0.1/tcp/7513/p2p/12D3KooWQSwwYci6poPyGDrun2i7kRt3bRnrR84kDTtFUAZk1CFg"
+    ],
     "min-peers": 1,
     "low-peers": 10,
     "high-peers": 20,

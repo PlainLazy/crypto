@@ -6,7 +6,9 @@
     "grpc-private-listener": "127.0.0.1:58801"
   },
   "p2p": {
-    "direct": [ ],
+    "direct": [
+      "/ip4/127.0.0.1/tcp/6000/p2p/12D3KooWD1yUxbYUihRWXbKi8Dmxi6zcprwwn3akZNhhJeiJSGFZ"
+    ],
     "autoscale-peers": true,
     "min-peers": 20,
     "low-peers": 40,
