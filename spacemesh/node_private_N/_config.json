@@ -7,10 +7,9 @@
     "grpc-private-listener": "127.0.0.1:58802"
   },
   "p2p": {
-    "listen": "/ip4/0.0.0.0/tcp/57802",
-    "disable-reuseport": true,
+    "listen": "/ip4/127.0.0.1/tcp/6000",
     "bootnodes": [],
-    "direct": [ "/dns4/localhost/tcp/57801/p2p/12D3KooWQSwwYci6poPyGDrun2i7kRt3bRnrR84kDTtFUAZk1CFg" ],
+    "direct": [ "/ip4/127.0.0.1/tcp/7513/p2p/12D3KooWQSwwYci6poPyGDrun2i7kRt3bRnrR84kDTtFUAZk1CFg" ],
     "min-peers": 1,
     "low-peers": 10,
     "high-peers": 20,
