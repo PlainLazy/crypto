@@ -2,6 +2,12 @@ $host.ui.RawUI.WindowTitle = Split-Path -Path $pwd -Leaf
 [console]::WindowWidth  = 90;
 [console]::WindowHeight = 20;
 
+if (!(test-path node_state.sql)) {
+  write-host 'node_state.sql not found'
+  pause
+  exit
+}
+
 $init = @()
 $nipost = @()
 
