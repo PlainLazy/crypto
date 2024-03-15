@@ -1,6 +1,6 @@
 $host.ui.RawUI.WindowTitle = Split-Path -Path $pwd -Leaf
 [console]::WindowWidth  = 80;
-[console]::WindowHeight = 40;
+[console]::WindowHeight = 60;
 
 write-host 'spacemesh.v1.NodeService.Status:'
 $pub = (gc _config.json | convertFrom-json).api.'grpc-public-listener'
@@ -9,5 +9,12 @@ $pub = (gc _config.json | convertFrom-json).api.'grpc-public-listener'
 write-host 'spacemesh.v1.DebugService.NetworkInfo:'
 $prv = (gc _config.json | convertFrom-json).api.'grpc-private-listener'
 ../grpcurl -plaintext -d "{}" $prv spacemesh.v1.DebugService.NetworkInfo
+
+write-host 'spacemesh.v1.PostInfoService.PostStates:'
+$post = (gc _config.json | convertFrom-json).api.'grpc-post-listener''127.0.0.1:9094'
+if (!$post) {
+  $post = '127.0.0.1:9094'
+}
+../grpcurl -plaintext -d "{}" $post spacemesh.v1.PostInfoService.PostStates
 
 Pause
