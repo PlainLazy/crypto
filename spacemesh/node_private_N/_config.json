@@ -3,6 +3,7 @@
   "post": { "post-labels-per-unit": 4294967296, "post-max-numunits": 1048576 },
   "poet": { "cycle-gap": "12h" },
   "api": {
+    "grpc-post-listener":      "0.0.0.0:59802",
     "grpc-public-listener":    "0.0.0.0:59802",
     "grpc-private-listener": "127.0.0.1:58802"
   },

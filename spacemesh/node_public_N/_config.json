@@ -2,6 +2,7 @@
   "main": { "data-folder": ".", "filelock": "lock", "layer-duration": "5m", "layers-per-epoch": 4032 },
   "post": { "post-labels-per-unit": 4294967296, "post-max-numunits": 1048576 }, "poet": { "cycle-gap": "12h" },
   "api": {
+    "grpc-post-listener":      "0.0.0.0:60801",
     "grpc-public-listener":    "0.0.0.0:59801",
     "grpc-private-listener": "127.0.0.1:58801"
   },
