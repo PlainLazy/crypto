@@ -11,7 +11,7 @@ $prv = (gc _config.json | convertFrom-json).api.'grpc-private-listener'
 ../grpcurl -plaintext -d "{}" $prv spacemesh.v1.DebugService.NetworkInfo
 
 write-host 'spacemesh.v1.PostInfoService.PostStates:'
-$post = (gc _config.json | convertFrom-json).api.'grpc-post-listener''127.0.0.1:9094'
+$post = (gc _config.json | convertFrom-json).api.'grpc-post-listener'
 if (!$post) {
   $post = '127.0.0.1:9094'
 }
