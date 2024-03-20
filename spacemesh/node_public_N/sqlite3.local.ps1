@@ -8,39 +8,52 @@ if (!(test-path local.sql)) {
   exit
 }
 
+$atx_sync_state = @()
 $initial_post = @()
 $challenge = @()
 $poet_registration = @()
 
-..\sqlite3.exe 'local.sql' "select hex(id), num_units, round(num_units*64.0/1024, 2) from initial_post;" | foreach-object {
+..\sqlite3.exe 'local.sql' "select count(*), round(sum(length(id))/pow(1024,3),3) from atx_sync_state;" | foreach-object {
+  $d = ($_ -split "\|")
+  $atx_sync_state += [PSCustomObject]@{
+    'atx_sync_states' = $d[0]
+    'GiB' = $d[1]
+  }
+}
+
+..\sqlite3.exe 'local.sql' "select row_number() over(order by id) num, hex(id), num_units, round(num_units*64.0/1024, 2) from initial_post;" | foreach-object {
   $d = ($_ -split "\|")
   $initial_post += [PSCustomObject]@{
-    'initial_post_id' = $d[0]
-    'num_units' = $d[1]
-    'size_TiB' = $d[2]
+    'num' = $d[0]
+    'initial_post_id' = $d[1]
+    'su' = $d[2]
+    'TiB' = $d[3]
   }
 }
 
-..\sqlite3.exe 'local.sql' "select hex(id), epoch, sequence from challenge;" | foreach-object {
+..\sqlite3.exe 'local.sql' "select row_number() over(order by id) num, hex(id), epoch, sequence from challenge;" | foreach-object {
   $d = ($_ -split "\|")
   $challenge += [PSCustomObject]@{
-    'challenge_id' = $d[0]
-    'epoch' = $d[1]
-    'sequence' = $d[2]
+    'num' = $d[0]
+    'challenge_id' = $d[1]
+    'epoch' = $d[2]
+    'sequence' = $d[3]
   }
 }
 
-..\sqlite3.exe 'local.sql' "select hex(id), hex(hash), address, round_id, datetime(round_end, 'unixepoch', 'localtime') from poet_registration;" | foreach-object {
+..\sqlite3.exe 'local.sql' "select row_number() over(order by id) num, hex(id), hex(hash), address, round_id, datetime(round_end, 'unixepoch', 'localtime') from poet_registration;" | foreach-object {
   $d = ($_ -split "\|")
   $poet_registration += [PSCustomObject]@{
-    'poet_registration_id' = $d[0]
-    'hash' = $d[1].tostring().substring(1, 4) + '...'
-    'address' = $d[2]
-    'round' = $d[3]
-    'end' = $d[4]
+    'num' = $d[0]
+    'poet_registration_id' = $d[1]
+    'hash' = $d[2].tostring().substring(1, 4) + '...'
+    'address' = $d[3]
+    'round' = $d[4]
+    'end' = $d[5]
   }
 }
 
+$atx_sync_state | ft
 $initial_post | ft
 $challenge | ft
 $poet_registration | ft
