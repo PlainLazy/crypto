@@ -41,12 +41,12 @@ select
     'coinbases'          = $coinbases
     'smeshers'           = $smeshers
     'networkPiB'         = $networkPiB
-    'growth'             = if ($prev -ne $null) { [math]::Round($networkPiB / $prev.'networkPiB', 2) } else { 0 }
+    'growth'             = if ($prev -ne $null) { [math]::Round($networkPiB / $prev.'networkPiB', 4) } else { 0 }
     'biggestTiB'         = [math]::Round($d[3], 1)
     'rewards'            = [math]::Round($d[5])
     'progress'           = [math]::Round($d[6], 4)
     'coinsPerTiB24hAvg'  = $coinsPerTiB24hAvg
-    'change'             = if ($prev -ne $null) { [math]::Round($coinsPerTiB24hAvg / $prev.'coinsPerTiB24hAvg', 2) } else { 0 }
+    'change'             = if ($prev -ne $null) { [math]::Round($coinsPerTiB24hAvg / $prev.'coinsPerTiB24hAvg', 4) } else { 0 }
   }
 }
 
