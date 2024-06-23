@@ -21,7 +21,7 @@ $poet_registration = @()
   }
 }
 
-..\sqlite3.exe 'local.sql' "select row_number() over(order by id) num, hex(id), num_units, round(num_units*64.0/1024, 2) from initial_post;" | foreach-object {
+..\sqlite3.exe 'local.sql' "select row_number() over(order by id) num, hex(id), num_units, round(num_units*64.0/1024, 2) from post;" | foreach-object {
   $d = ($_ -split "\|")
   $initial_post += [PSCustomObject]@{
     'num' = $d[0]
