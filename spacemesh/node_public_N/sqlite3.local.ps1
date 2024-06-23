@@ -9,7 +9,7 @@ if (!(test-path local.sql)) {
 }
 
 $atx_sync_state = @()
-$initial_post = @()
+$post = @()
 $challenge = @()
 $poet_registration = @()
 
@@ -23,9 +23,9 @@ $poet_registration = @()
 
 ..\sqlite3.exe 'local.sql' "select row_number() over(order by id) num, hex(id), num_units, round(num_units*64.0/1024, 2) from post;" | foreach-object {
   $d = ($_ -split "\|")
-  $initial_post += [PSCustomObject]@{
+  $post += [PSCustomObject]@{
     'num' = $d[0]
-    'initial_post_id' = $d[1]
+    'post_id' = $d[1]
     'su' = $d[2]
     'TiB' = $d[3]
   }
@@ -38,6 +38,14 @@ $poet_registration = @()
     'challenge_id' = $d[1]
     'epoch' = $d[2]
     'sequence' = $d[3]
+  }
+}
+
+..\sqlite3.exe 'local.sql' "select row_number() over(order by id) num, hex(id) from nipost;" | foreach-object {
+  $d = ($_ -split "\|")
+  $challenge += [PSCustomObject]@{
+    'num' = $d[0]
+    'id' = $d[1]
   }
 }
 
@@ -54,7 +62,7 @@ $poet_registration = @()
 }
 
 $atx_sync_state | ft
-$initial_post | ft
+$post | ft
 $challenge | ft
 $poet_registration | ft
 
